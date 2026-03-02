@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Stack, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useAppStore } from '../src/stores/appStore';
-import { useThemeStore, useColors } from '../src/stores/themeStore';
+import { useColors } from '../src/stores/themeStore';
 
 function AuthGate() {
   const { isAuthenticated } = useAppStore();
@@ -10,9 +10,7 @@ function AuthGate() {
   const router = useRouter();
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
-    setReady(true);
-  }, []);
+  useEffect(() => { setReady(true); }, []);
 
   useEffect(() => {
     if (!ready) return;
@@ -33,17 +31,24 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style={colors.statusBar} />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: colors.bg },
-          animation: 'slide_from_right',
-        }}
-      >
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="listing/[id]" />
-        <Stack.Screen name="profile/edit" />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg }, animation: 'slide_from_right' }}>
+        {/* Auth ekranları — geri gesture tamamen kapalı */}
+        <Stack.Screen name="(auth)" options={{ gestureEnabled: false, animation: 'none' }} />
+        {/* Ana ekranlar */}
+        <Stack.Screen name="(tabs)" options={{ gestureEnabled: false, animation: 'none' }} />
+        <Stack.Screen name="listing/[id]" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="listing/edit" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/edit" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/listings" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/notifications" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/security" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/payment" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/help" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/contact" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/privacy" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        <Stack.Screen name="profile/about" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
+        {/*<Stack.Screen name="profile/settings" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />*/}
+        <Stack.Screen name="user/[id]" options={{ gestureEnabled: true, animation: 'slide_from_right' }} />
       </Stack>
       <AuthGate />
     </>
