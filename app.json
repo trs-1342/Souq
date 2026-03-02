@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": false,
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,13 +21,24 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#0A0A0F"
       },
-      "package": "com.trs1342.souq"
+      "package": "com.trs1342.souq",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION"
+      ]
     },
     "plugins": [
       "expo-router",
       "expo-image-picker",
       "expo-location"
     ],
-    "scheme": "souq"
+    "scheme": "souq",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "aa2e45a2-8586-4403-a879-6e00ba8fc691"
+      }
+    }
   }
 }
