@@ -22,9 +22,10 @@ export default function ProfileScreen() {
     {
       title: 'Hesabım',
       items: [
-        { icon: 'shield-checkmark-outline' as IconName, label: 'Güvenlik & Şifre', iconColor: colors.secondary, onPress: () => {} },
-        { icon: 'card-outline' as IconName, label: 'Ödeme Yöntemleri', onPress: () => {} },
-        // { icon: 'star-outline' as IconName, label: "Pro'ya Geç", iconColor: colors.gold, onPress: () => {} },
+        { icon: 'list-outline' as IconName, label: 'İlanlarım', onPress: () => router.push('/profile/listings' as any) },
+        { icon: 'person-outline' as IconName, label: 'Profili Düzenle', onPress: () => router.push('/profile/edit' as any) },
+        { icon: 'shield-checkmark-outline' as IconName, label: 'Güvenlik & Şifre', iconColor: colors.info, onPress: () => router.push('/profile/security' as any) },
+        { icon: 'card-outline' as IconName, label: 'Ödeme Yöntemleri', onPress: () => router.push('/profile/payment' as any) },
       ],
     },
     {
@@ -37,10 +38,10 @@ export default function ProfileScreen() {
     {
       title: 'Destek',
       items: [
-        { icon: 'help-circle-outline' as IconName, label: 'Yardım & SSS', onPress: () => {} },
-        { icon: 'chatbubble-outline' as IconName, label: 'Bize Ulaşın', onPress: () => {} },
-        { icon: 'document-text-outline' as IconName, label: 'Gizlilik Politikası', onPress: () => {} },
-        { icon: 'information-circle-outline' as IconName, label: 'Hakkında', onPress: () => {} },
+        { icon: 'help-circle-outline' as IconName, label: 'Yardım & SSS', onPress: () => router.push('/profile/help' as any) },
+        { icon: 'chatbubble-outline' as IconName, label: 'Bize Ulaşın', onPress: () => router.push('/profile/contact' as any) },
+        { icon: 'document-text-outline' as IconName, label: 'Gizlilik Politikası', onPress: () => router.push('/profile/privacy' as any) },
+        { icon: 'information-circle-outline' as IconName, label: 'Hakkında', onPress: () => router.push('/profile/about' as any) },
       ],
     },
     {
@@ -63,8 +64,9 @@ export default function ProfileScreen() {
         {/* Header */}
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: Spacing.base, paddingTop: Spacing.md, paddingBottom: Spacing.base }}>
           <Text style={{ color: colors.textPrimary, fontSize: Typography.xl, fontWeight: '800' }}>Profil</Text>
-          <TouchableOpacity onPress={() => router.push('/profile/edit')} style={{ padding: 4 }}>
-            <Ionicons name="create-outline" size={22} color={colors.textSecondary} />
+          <TouchableOpacity onPress={() => router.push('/profile/notifications' as any)} style={{ position: 'relative', padding: 6 }}>
+            <Ionicons name="notifications-outline" size={22} color={colors.textSecondary} />
+            <View style={{ position: 'absolute', top: 6, right: 6, width: 8, height: 8, borderRadius: 4, backgroundColor: colors.primary, borderWidth: 1.5, borderColor: colors.bg }} />
           </TouchableOpacity>
         </View>
 
@@ -83,7 +85,10 @@ export default function ProfileScreen() {
             )}
           </View>
           <Text style={{ color: colors.textPrimary, fontSize: Typography.xl, fontWeight: '700' }}>{currentUser?.name}</Text>
-          <Text style={{ color: colors.textMuted, fontSize: Typography.sm, marginTop: 4, marginBottom: Spacing.lg }}>{currentUser?.email}</Text>
+          {currentUser?.username && (
+            <Text style={{ color: colors.primary, fontSize: Typography.sm, fontWeight: '600', marginTop: 2 }}>@{currentUser.username}</Text>
+          )}
+          <Text style={{ color: colors.textMuted, fontSize: Typography.sm, marginTop: 2, marginBottom: Spacing.lg }}>{currentUser?.email}</Text>
 
           {/* Stats */}
           <View style={{ flexDirection: 'row', width: '100%', marginBottom: Spacing.lg }}>
@@ -100,7 +105,7 @@ export default function ProfileScreen() {
             ))}
           </View>
 
-          <TouchableOpacity onPress={() => router.push('/profile/edit')}
+          <TouchableOpacity onPress={() => router.push('/profile/edit' as any)}
             style={{ paddingHorizontal: Spacing.xl, paddingVertical: 10, borderRadius: Radius.full, borderWidth: 1.5, borderColor: colors.border }}>
             <Text style={{ color: colors.textSecondary, fontSize: Typography.sm, fontWeight: '600' }}>Profili Düzenle</Text>
           </TouchableOpacity>
@@ -109,7 +114,7 @@ export default function ProfileScreen() {
         {/* Hızlı Erişim */}
         <View style={{ flexDirection: 'row', marginHorizontal: Spacing.base, backgroundColor: colors.bgCard, borderRadius: Radius.xl, borderWidth: 1, borderColor: colors.border, padding: Spacing.base, marginBottom: Spacing.base }}>
           {[
-            { icon: 'list-outline' as IconName, label: 'İlanlarım', count: currentUser?.listingCount, onPress: () => {} },
+            { icon: 'list-outline' as IconName, label: 'İlanlarım', count: currentUser?.listingCount, onPress: () => router.push('/profile/listings' as any) },
             { icon: 'heart-outline' as IconName, label: 'Favoriler', count: favCount, onPress: () => router.push('/(tabs)/favorites') },
             { icon: 'chatbubbles-outline' as IconName, label: 'Mesajlar', count: 0, onPress: () => router.push('/(tabs)/messages') },
           ].map(qa => (
@@ -160,7 +165,7 @@ export default function ProfileScreen() {
         ))}
 
         <Text style={{ color: colors.textMuted, fontSize: Typography.xs, textAlign: 'center', paddingVertical: Spacing.xl }}>
-          Souq v1.0.0
+          Souq v1.0.0 • MIT Lisansı
         </Text>
       </ScrollView>
     </SafeAreaView>

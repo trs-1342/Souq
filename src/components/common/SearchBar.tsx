@@ -7,11 +7,12 @@ import { useAppStore } from '../../stores/appStore';
 
 interface Props {
   onFocus?: () => void;
+  onFilterPress?: () => void;
   placeholder?: string;
   readOnly?: boolean;
 }
 
-export function SearchBar({ onFocus, placeholder = 'Ne arıyorsunuz?', readOnly }: Props) {
+export function SearchBar({ onFocus, onFilterPress, placeholder = 'Ne arıyorsunuz?', readOnly }: Props) {
   const colors = useColors();
   const { filters, setFilters } = useAppStore();
   const [local, setLocal] = useState(filters.query ?? '');
@@ -53,8 +54,8 @@ export function SearchBar({ onFocus, placeholder = 'Ne arıyorsunuz?', readOnly 
           </>
         )}
         <View style={{ width: 1, height: 20, backgroundColor: colors.border }} />
-        <TouchableOpacity style={{ padding: 4 }}>
-          <Ionicons name="options-outline" size={18} color={colors.textSecondary} />
+        <TouchableOpacity style={{ padding: 4 }} onPress={onFilterPress ?? onFocus}>
+          <Ionicons name="options-outline" size={18} color={onFilterPress ? colors.primary : colors.textSecondary} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>
