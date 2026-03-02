@@ -21,7 +21,7 @@ npx expo start --ios
 ## 📁 Proje Yapısı
 
 ```
-pazaryeri/
+Souq/
 ├── app/                        # Expo Router sayfaları
 │   ├── _layout.tsx             # Root layout (Stack Navigator)
 │   ├── (tabs)/                 # Tab navigation
@@ -55,7 +55,7 @@ pazaryeri/
 
 ## 🎨 Tasarım Sistemi
 
-- **Tema**: Koyu (Dark Mode varsayıla)
+- **Tema**: Koyu (Dark Mode varsayılan)
 - **Ana Renk**: `#FF4757` (Canlı kırmızı)
 - **Başarı**: `#2ED573` (Yeşil — fiyat, onay)
 - **Arka Plan**: `#0A0A0F` (Derin koyu)
